@@ -2,20 +2,24 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class URL(models.Model):
+class ShortURL(models.Model):
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='urls')
-    long_url = models.URLField(max_length=1500, unique=False)
-    short_url = models.CharField(max_length=40, unique=True)
+    slug = models.CharField(max_length=64, unique=True, db_index=True)
+    target_url = models.URLField(max_length=2000)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField(null=True, blank=True)
+    max_clicks = models.PositiveIntegerField(null=True, blank=True)
+    click_count = models.PositiveIntegerField(default=0)
 
-    MAX_URLS_PER_USER = 10  # Limite de URLs por usuário
 
-    def save(self, *args, **kwargs):
-        # Verifica se o usuário já tem 10 URLs
-        if self.owner.urls.count() >= self.MAX_URLS_PER_USER:
-            # Apaga a URL mais antiga
-            oldest_url = self.owner.urls.order_by('id').first()
-            oldest_url.delete()
-
-        # Salva a nova URL
-        super().save(*args, **kwargs)
+class Click(models.Model):
+    short = models.ForeignKey(
+        ShortURL, related_name='clicks', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    ip = models.GenericIPAddressField(null=True, blank=True)
+    user_agent = models.TextField(null=True, blank=True)
+    referrer = models.TextField(null=True, blank=True)
+    # opcional: preencher via GeoIP
+    country = models.CharField(max_length=64, null=True, blank=True)

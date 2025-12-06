@@ -5,6 +5,10 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
 
+class ShortenURLForm(forms.Form):
+    long_url = forms.URLField()
+
+
 class RegisterForm(UserCreationForm):
     """
     Formulário base reutilizável para cadastro de usuários em múltiplos apps.
