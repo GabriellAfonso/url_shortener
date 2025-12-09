@@ -6,6 +6,103 @@
 /* .guest-login-bnt {
     margin-top: 20px;
 } */
+/* Sidebar padrão */
+.sidebar {
+    width: 240px;
+    /* height: 100vh; */
+    background: #fff;
+    transition: width .3s;
+   
+}
+
+.sidebar .nav-link a {
+    margin-left: 10px;
+    height: 40px;
+    padding-left: 10px;
+ 
+}
+
+
+.sidebar ul li {
+    width: 100%;
+    display: flex;
+   justify-content: start;
+}
+.sidebar.collapsed ul li {
+display: flex;
+justify-content: center;
+width: 100%;
+}
+
+.sidebar ul li .nav-link {
+    display: flex;
+    width: 100%;
+    /* box-sizing: border-box; */
+    align-items: center;
+}
+
+/* Modo colapsado */
+.sidebar.collapsed {
+    width: 70px;
+}
+
+/* Esconde textos quando colapsado */
+.sidebar.collapsed .text {
+    opacity: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* transition: opacity .2s; */
+}
+
+/* Alinhamento dos itens */
+.sidebar .nav-link {
+    color: #444;
+    padding: 0;
+    padding-left: 15px;
+    margin-bottom: 5px;
+}
+.sidebar .nav-link:hover {
+    background: #f1f1f1;
+}
+
+/* Ícones sempre visíveis */
+.sidebar .nav-link i {
+    
+    min-width: 24px;
+    text-align: center;
+}
+.sidebar span {
+    padding-left: .5rem;
+
+}
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 15px;
+}
+
+
+.teste {
+    justify-content: start;
+    margin-left: 2px;
+   
+}
+
+
+
+
+
+.nav-link.active i {
+    color: #0d6efd; /* azul padrão bootstrap, pode trocar */
+}
+
+.nav-link.active {
+    background-color: #e7f1ff; /* leve destaque opcional */
+}
 
 .link_button {
     margin-top: 20px;
