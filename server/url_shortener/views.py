@@ -50,9 +50,9 @@ class ShortenUrl(View):
         slug = shortener_service.create_short_url()
         print('slug:', slug)
 
+        # TODO AO INVES DE PEGAR AS URLS E OS DADOS SIMPLESMENTE REDIRECIONAR PRO GET
         base_url = self.get_base_url(request)
 
-        # AO INVES DE PEGAR AS URLS E OS DADOS SIMPLESMENTE REDIRECIONAR PRO GET
         user_urls = ShortURL.objects.filter(owner=user)
 
         context = {'user_urls': user_urls,
